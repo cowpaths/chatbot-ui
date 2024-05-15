@@ -18,12 +18,12 @@ jobs:
                      echo "${GCLOUD_CREDS}" > ${HOME}/gcloud-service-key.json
                      gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
                      gcloud config set project fs-ops
-                     gcloud auth configure-docker --quiet gcr.io   # Eventually change to: us-central1-docker.pkg.dev
+                     gcloud auth configure-docker --quiet us-central1-docker.pkg.dev
       - run:
           name: Build and Publish Docker Image
           command: |
-            docker build -t gcr.io/fs-ops/chatbot-ui:${CIRCLE_SHA1} .
-            docker push gcr.io/fs-ops/chatbot-ui:${CIRCLE_SHA1}
+            docker build -t us-central1-docker.pkg.dev/fs-ops/fullstory-images/chatbot-ui:${CIRCLE_SHA1} .
+            docker push us-central1-docker.pkg.dev/fs-ops/fullstory-images/chatbot-ui:${CIRCLE_SHA1}
 
 workflows:
   build-and-publish-workflow:
